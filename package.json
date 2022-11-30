@@ -7,39 +7,46 @@
     "dev": "tsup --watch",
     "build": "tsup",
     "preview": "cd docs/build && serve .",
-    "lint": "eslint --fix --ext .ts,.tsx,.js,.jsx --quiet ./",
-    "prepare": "husky install"
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx ./",
+    "lint:fix": "eslint --fix --ext .ts,.tsx,.js,.jsx --quiet ./",
+    "prepare": "husky install",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test",
+    "prepare:e2e": "tsx scripts/prepare-e2e.cts"
   },
   "bin": {
     "island": "bin/island.js"
   },
-  
-    "lint-staged": {
-      "**/*.{js,jsx,tsx,ts}": [
-        "npm run lint"
-      ]
-    },
+  "lint-staged": {
+    "**/*.{js,jsx,tsx,ts}": [
+      "npm run lint:fix"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
+    "@playwright/test": "1.26.1",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
+    "@vitest/ui": "^0.25.3",
     "commitlint": "^17.3.0",
     "eslint": "^8.28.0",
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "execa": "5.1.1",
     "husky": "^8.0.2",
     "lint-staged": "^13.0.4",
     "rollup": "^3.4.0",
     "tsup": "^6.5.0",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.3",
+    "vitest": "^0.25.3"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^2.2.0",
