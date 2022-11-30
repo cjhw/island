@@ -1,16 +1,16 @@
-import os from 'os'
-import path from 'path'
+import os from 'os';
+import path from 'path';
 
 export function slash(p: string): string {
-  return p.replace(/\\/g, '/')
+  return p.replace(/\\/g, '/');
 }
 
-export const isWindows = os.platform() === 'win32'
+export const isWindows = os.platform() === 'win32';
 
 export function normalizePath(id: string): string {
-  return path.posix.normalize(isWindows ? slash(id) : id)
+  return path.posix.normalize(isWindows ? slash(id) : id);
 }
 
 export function resolvePath(url: string) {
-  return isWindows ? 'file://' + normalizePath(url) : url
+  return isWindows ? 'file://' + normalizePath(url) : url;
 }

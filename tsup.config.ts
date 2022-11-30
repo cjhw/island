@@ -1,4 +1,4 @@
-import { defineConfig } from 'tsup'
+import { defineConfig } from 'tsup';
 
 export default defineConfig({
   entryPoints: ['src/node/cli.ts'],
@@ -9,5 +9,5 @@ export default defineConfig({
   format: ['cjs', 'esm'],
   dts: true,
   // 打入pollyfill
-  shims: true,
-})
+  shims: true
+});
