@@ -9,12 +9,20 @@ export async function createDevServer(
   root = process.cwd(),
   restart: () => Promise<void>
 ) {
-  const config = await resolveConfig(root, 'serve', 'development');
+  const [config, dependences] = await resolveConfig(
+    root,
+    'serve',
+    'development'
+  );
   console.log(config);
 
   return createViteDevServer({
     root,
-    plugins: [pluginIndexHtml(), pluginReact(), pluginConfig(config, restart)],
+    plugins: [
+      pluginIndexHtml(),
+      pluginReact(),
+      pluginConfig(config, dependences, restart)
+    ],
     // 允许访问不在根目录下的文件夹
     server: {
       fs: {

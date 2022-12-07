@@ -31,7 +31,7 @@ export async function resolveUserConfig(
   // 2. 读取配置文件的内容
   const result = await loadConfigFromFile({ command, mode }, configPath, root);
   if (result) {
-    const { config: rawConfig = {} as RawConfig } = result;
+    const { config: rawConfig = {} as RawConfig, dependencies } = result;
     // 三种情况:
     // 1. object
     // 2. promise
@@ -39,9 +39,9 @@ export async function resolveUserConfig(
     const userConfig = await (typeof rawConfig === 'function'
       ? rawConfig()
       : rawConfig);
-    return [configPath, userConfig] as const;
+    return [configPath, userConfig, dependencies] as const;
   } else {
-    return [configPath, {} as UserConfig] as const;
+    return [configPath, {} as UserConfig, []] as const;
   }
 }
 
@@ -58,14 +58,18 @@ export async function resolveConfig(
   root: string,
   command: 'serve' | 'build',
   mode: 'development' | 'production'
-) {
-  const [configPath, userConfig] = await resolveUserConfig(root, command, mode);
+): Promise<[SiteConfig, string[]]> {
+  const [configPath, userConfig, dependences] = await resolveUserConfig(
+    root,
+    command,
+    mode
+  );
   const siteConfig: SiteConfig = {
     root,
     configPath,
     siteData: resolveSiteData(userConfig as UserConfig)
   };
-  return siteConfig;
+  return [siteConfig, dependences as string[]];
 }
 
 export function defineConfig(config: UserConfig): UserConfig {
