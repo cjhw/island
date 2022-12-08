@@ -6,3 +6,4 @@ dist
 bin
 esm-cjs
 docs
+filetoc.config.js
