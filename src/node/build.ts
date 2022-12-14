@@ -5,13 +5,21 @@ import { join } from 'path';
 import fs from 'fs-extra';
 import ora from 'ora';
 import { resolvePath } from '../utils';
+import { SiteConfig } from '../shared/types/index';
+import pluginReact from '@vitejs/plugin-react';
+import { pluginConfig } from './plugin-island/config';
 
 const spinner = ora();
 
-export async function bundle(root: string) {
+export async function bundle(root: string, config: SiteConfig) {
   const resolveViteConfig = (isServer: boolean): InlineConfig => ({
     mode: 'production',
     root,
+    plugins: [pluginReact(), pluginConfig(config)],
+    ssr: {
+      // 将包打包进ssr的产物，不然因为react-router-dom是esm格式的require会报错
+      noExternal: ['react-router-dom']
+    },
     build: {
       ssr: isServer,
       outDir: isServer ? '.temp' : 'build',
@@ -41,9 +49,10 @@ export async function bundle(root: string) {
   }
 }
 
-export async function build(root: string = process.cwd()) {
+export async function build(root: string = process.cwd(), config: SiteConfig) {
   // 1. bundle - client 端 + server 端
-  const [clientBundle] = await bundle(root);
+
+  const [clientBundle] = await bundle(root, config);
   // 2. 引入 server-entry 模块
   const serverEntryPath = join(root, '.temp', 'ssr-entry.js');
 

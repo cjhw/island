@@ -69,6 +69,7 @@ export async function resolveConfig(
     configPath,
     siteData: resolveSiteData(userConfig as UserConfig)
   };
+
   return [siteConfig, dependences as string[]];
 }
 
