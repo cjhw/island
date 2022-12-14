@@ -49,10 +49,12 @@
     "vitest": "^0.25.3"
   },
   "dependencies": {
+    "@loadable/component": "^5.15.2",
     "@vitejs/plugin-react": "^2.2.0",
     "cac": "^6.7.14",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "fast-glob": "^3.2.12",
     "fs-extra": "^10.1.0",
     "ora": "^6.1.2",
     "prettier": "^2.8.0",

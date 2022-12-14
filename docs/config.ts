@@ -1,6 +1,6 @@
 import {defineConfig} from '../dist'
-import a from './a'
+import test from './test'
 
 export default defineConfig({
-  description:a.a
+  description:test.a
 })
