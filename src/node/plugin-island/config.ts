@@ -39,8 +39,10 @@ export function pluginConfig(
     // },
     async handleHotUpdate(ctx) {
       const customWatchFiles = [config.configPath];
-      for (const dep of dependences) {
-        customWatchFiles.push(normalizePath(resolve(dep)));
+      if (dependences) {
+        for (const dep of dependences) {
+          customWatchFiles.push(normalizePath(resolve(dep)));
+        }
       }
       const include = (id: string) =>
         customWatchFiles.some((file) => id.includes(file));

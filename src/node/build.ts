@@ -8,6 +8,7 @@ import { resolvePath } from '../utils';
 import { SiteConfig } from '../shared/types/index';
 import pluginReact from '@vitejs/plugin-react';
 import { pluginConfig } from './plugin-island/config';
+import { createVitePlugins } from './vitePlugins';
 
 const spinner = ora();
 
@@ -15,7 +16,7 @@ export async function bundle(root: string, config: SiteConfig) {
   const resolveViteConfig = (isServer: boolean): InlineConfig => ({
     mode: 'production',
     root,
-    plugins: [pluginReact(), pluginConfig(config)],
+    plugins: createVitePlugins(config),
     ssr: {
       // 将包打包进ssr的产物，不然因为react-router-dom是esm格式的require会报错
       noExternal: ['react-router-dom']
