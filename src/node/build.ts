@@ -6,8 +6,6 @@ import fs from 'fs-extra';
 import ora from 'ora';
 import { resolvePath } from '../utils';
 import { SiteConfig } from '../shared/types/index';
-import pluginReact from '@vitejs/plugin-react';
-import { pluginConfig } from './plugin-island/config';
 import { createVitePlugins } from './vitePlugins';
 
 const spinner = ora();
