@@ -17,7 +17,7 @@ export async function createDevServer(
 
   return createViteDevServer({
     root: PACKAGE_ROOT,
-    plugins: createVitePlugins(config, dependences, restart),
+    plugins: await createVitePlugins(config, dependences, restart),
     // 允许访问不在根目录下的文件夹
     server: {
       fs: {

@@ -15,9 +15,12 @@ export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
       ) {
         const codeNode = node.children[0];
         const codeClassName = codeNode.properties?.className?.toString() || '';
+
+        // 2. 解析出代码的语言名称
+        // language-xxx
         const lang = codeClassName.split('-')[1];
 
-        codeNode.properties.className = '';
+        // codeNode.properties.className = '';
         const clonedNode: Element = {
           type: 'element',
           tagName: 'pre',
@@ -27,6 +30,7 @@ export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
           }
         };
 
+        // 3. 变换 Html AST
         node.tagName = 'div';
         node.properties = node.properties || {};
         node.properties.className = codeClassName;
@@ -48,8 +52,6 @@ export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
           clonedNode
         ];
       }
-      // 2. 解析出代码的语言名称
-      // 3. 变换 Html AST
     });
   };
 };

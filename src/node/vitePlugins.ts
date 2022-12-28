@@ -6,7 +6,7 @@ import pluginReact from '@vitejs/plugin-react';
 import { createMdxPlugins } from './plugin-mdx/index';
 import { Plugin } from 'vite';
 
-export function createVitePlugins(
+export async function createVitePlugins(
   config: SiteConfig,
   dependences?: string[],
   restartServer?: () => Promise<void>
