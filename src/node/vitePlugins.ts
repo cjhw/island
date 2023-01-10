@@ -9,13 +9,14 @@ import { Plugin } from 'vite';
 export async function createVitePlugins(
   config: SiteConfig,
   dependences?: string[],
-  restartServer?: () => Promise<void>
+  restartServer?: () => Promise<void>,
+  isSSR = false
 ) {
   return [
     pluginIndexHtml(),
     pluginReact({ jsxRuntime: 'automatic' }),
     pluginConfig(config, dependences, restartServer),
-    pluginRoutes({ root: config.root }),
+    pluginRoutes({ root: config.root, isSSR }),
     createMdxPlugins()
   ] as Plugin[];
 }
