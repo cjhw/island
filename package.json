@@ -81,6 +81,7 @@
     "remark-stringify": "^10.0.2",
     "shiki": "^0.12.1",
     "unified": "^10.1.2",
+    "unocss": "^0.48.4",
     "vite": "3.2.1"
   }
 }

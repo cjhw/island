@@ -5,6 +5,8 @@ import { pluginRoutes } from './plugin-routes';
 import pluginReact from '@vitejs/plugin-react';
 import { createMdxPlugins } from './plugin-mdx/index';
 import { Plugin } from 'vite';
+import pluginUnocss from 'unocss/vite';
+import unocssOptions from './unocssOptions';
 
 export async function createVitePlugins(
   config: SiteConfig,
@@ -13,6 +15,7 @@ export async function createVitePlugins(
   isSSR = false
 ) {
   return [
+    pluginUnocss(unocssOptions),
     pluginIndexHtml(),
     pluginReact({ jsxRuntime: 'automatic' }),
     pluginConfig(config, dependences, restartServer),
