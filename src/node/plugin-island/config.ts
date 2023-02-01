@@ -35,6 +35,7 @@ export function pluginConfig(
         },
         css: {
           modules: {
+            // 支持css驼峰命名
             localsConvention: 'camelCaseOnly'
           }
         }
