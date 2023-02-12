@@ -3,6 +3,7 @@ import 'uno.css';
 import '../styles/base.css';
 import '../styles/vars.css';
 import { Nav } from '../../theme-default/components/Nav';
+import { HomeLayout } from './HomeLayout/index';
 
 export function Layout() {
   const pageData = usePageData();
@@ -11,16 +12,12 @@ export function Layout() {
   // 根据 pageType 分发不同的页面内容
   const getContent = () => {
     if (pageType === 'home') {
-      return <div>Home 页面</div>;
+      return <HomeLayout />;
     } else if (pageType === 'doc') {
       return <div>正文页面</div>;
     } else {
       return <div>404 页面</div>;
     }
   };
-  return (
-    <div>
-      <Nav />
-    </div>
-  );
+  return <div>{getContent()}</div>;
 }
