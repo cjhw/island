@@ -51,6 +51,7 @@ specifiers:
   rollup: ^3.4.0
   sass: ^1.58.0
   shiki: ^0.12.1
+  sirv: ^2.0.2
   tsup: ^6.5.0
   typescript: ^4.9.3
   unified: ^10.1.2
@@ -89,6 +90,7 @@ dependencies:
   remark-rehype: 10.1.0
   remark-stringify: 10.0.2
   shiki: 0.12.1
+  sirv: 2.0.2
   unified: 10.1.2
   unocss: 0.48.4_rollup@3.4.0+vite@3.2.1
   vite: 3.2.1_sass@1.58.0

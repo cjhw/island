@@ -53,8 +53,8 @@
     "vitest": "^0.25.3"
   },
   "dependencies": {
-    "@loadable/component": "^5.15.2",
     "@iconify-json/carbon": "^1.1.14",
+    "@loadable/component": "^5.15.2",
     "@mdx-js/rollup": "^2.2.1",
     "@vitejs/plugin-react": "^2.2.0",
     "acorn": "^8.8.1",
@@ -82,6 +82,7 @@
     "remark-rehype": "^10.1.0",
     "remark-stringify": "^10.0.2",
     "shiki": "^0.12.1",
+    "sirv": "^2.0.2",
     "unified": "^10.1.2",
     "unocss": "^0.48.4",
     "vite": "3.2.1"

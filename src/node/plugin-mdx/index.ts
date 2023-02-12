@@ -1,5 +1,4 @@
 import { pluginMdxRollup } from './pluginMdxRollup';
-import { Plugin } from 'vite';
 import { pluginMdxHMR } from './pluginMdxHmr';
 
 // Vite热更新逻辑

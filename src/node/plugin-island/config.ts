@@ -3,6 +3,7 @@ import { SiteConfig } from 'shared/types/index';
 import { Plugin } from 'vite';
 import { normalizePath } from 'vite';
 import { PACKAGE_ROOT } from '../constants/index';
+import sirv from 'sirv';
 
 const SITE_DATA_ID = 'island:site-data';
 
@@ -41,9 +42,6 @@ export function pluginConfig(
         }
       };
     },
-    // configureServer(s) {
-    //   server = s;
-    // },
     async handleHotUpdate(ctx) {
       const customWatchFiles = [config.configPath];
       if (dependences) {
@@ -67,6 +65,11 @@ export function pluginConfig(
         // ✅ 可行
         await restartServer();
       }
+    },
+    configureServer(server) {
+      const publicDir = join(config.root, 'public');
+
+      server.middlewares.use(sirv(publicDir));
     }
   };
 }

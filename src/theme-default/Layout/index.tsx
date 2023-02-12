@@ -4,6 +4,7 @@ import '../styles/base.css';
 import '../styles/vars.css';
 import { Nav } from '../../theme-default/components/Nav';
 import { HomeLayout } from './HomeLayout/index';
+import { DocLayout } from './DocLayout/index';
 
 export function Layout() {
   const pageData = usePageData();
@@ -14,10 +15,15 @@ export function Layout() {
     if (pageType === 'home') {
       return <HomeLayout />;
     } else if (pageType === 'doc') {
-      return <div>正文页面</div>;
+      return <DocLayout />;
     } else {
       return <div>404 页面</div>;
     }
   };
-  return <div>{getContent()}</div>;
+  return (
+    <div>
+      <Nav />
+      {getContent()}
+    </div>
+  );
 }
