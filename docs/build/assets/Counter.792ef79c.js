@@ -1,1 +1,0 @@
-import{r as o,j as s,a as t}from"./client-entry.0ded3328.js";function a(){const[e,n]=o.exports.useState(0);return s("div",{children:[t("p",{children:e}),t("button",{onClick:()=>n(r=>r+1),children:"\u70B9\u51FB\u52A01"})]})}export{a as default};

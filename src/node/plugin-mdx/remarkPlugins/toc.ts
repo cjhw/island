@@ -17,11 +17,12 @@ interface ChildNode {
   children?: ChildNode[];
 }
 
-const slugger = new Slugger();
-
 export const remarkPluginToc: Plugin<[], Root> = () => {
   return (tree) => {
+    // slugger具有记忆功能，所以不能放全局，比如第二次编译还是a会变成a-1
+    const slugger = new Slugger();
     const toc: TocItem[] = [];
+
     visit(tree, 'heading', (node) => {
       if (!node.depth || !node.children?.length) {
         return;

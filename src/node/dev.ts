@@ -13,7 +13,7 @@ export async function createDevServer(
     'serve',
     'development'
   );
-  console.log(config);
+  console.log('config:', config);
 
   return createViteDevServer({
     root: PACKAGE_ROOT,

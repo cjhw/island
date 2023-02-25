@@ -1,5 +1,7 @@
+import { PACKAGE_ROOT } from './../constants/index';
 import assert from 'assert';
-import { Plugin } from 'vite';
+import path from 'path';
+import { Plugin, normalizePath } from 'vite';
 
 export function pluginMdxHMR(): Plugin {
   let viteReactPlugin: Plugin;
@@ -30,6 +32,21 @@ export function pluginMdxHMR(): Plugin {
           result.code += 'import.meta.hot.accept()';
         }
         return result;
+      }
+    },
+    handleHotUpdate(ctx) {
+      if (/\.mdx/.test(ctx.file)) {
+        const filePath = normalizePath(
+          '/' + path.relative(PACKAGE_ROOT, ctx.file)
+        );
+        // console.log(filePath);
+        ctx.server.ws.send({
+          type: 'custom',
+          event: 'mdx-changed',
+          data: {
+            filePath
+          }
+        });
       }
     }
   };
