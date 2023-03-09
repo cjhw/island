@@ -98,5 +98,5 @@ export async function renderPage(
       await fs.writeFile(join(root, 'build', fileName), html);
     })
   );
-  await fs.remove(join(root, '.temp'));
+  // await fs.remove(join(root, '.temp'));
 }
