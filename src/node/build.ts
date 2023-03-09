@@ -16,6 +16,8 @@ import { RenderResult } from 'runtime/ssr-entry';
 
 const spinner = ora();
 
+const CLIENT_OUTPUT = 'build';
+
 export async function bundle(root: string, config: SiteConfig) {
   const resolveViteConfig = async (
     isServer: boolean
@@ -29,7 +31,7 @@ export async function bundle(root: string, config: SiteConfig) {
     },
     build: {
       ssr: isServer,
-      outDir: isServer ? join(root, '.temp') : join(root, 'build'),
+      outDir: isServer ? join(root, '.temp') : join(root, CLIENT_OUTPUT),
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
@@ -49,6 +51,10 @@ export async function bundle(root: string, config: SiteConfig) {
       viteBuild(await resolveViteConfig(true)),
       spinner.succeed('Build client + server bundles success')
     ]);
+    const publicDir = join(root, 'public');
+    if (fs.pathExistsSync(publicDir)) {
+      await fs.copy(publicDir, join(root, CLIENT_OUTPUT));
+    }
     return [clientBundle, serverBundle] as [RollupOutput, RollupOutput];
   } catch (error) {
     console.log(error);
@@ -151,8 +157,16 @@ export async function renderPage(
   await Promise.all(
     routes.map(async (route) => {
       const routePath = route.path;
-      const { appHtml, islandToPathMap } = await render(routePath);
-      buildIslands(root, islandToPathMap);
+      const {
+        appHtml,
+        islandToPathMap,
+        islandProps = []
+      } = await render(routePath);
+      const styleAssets = clientBundle.output.filter(
+        (chunk) => chunk.type === 'asset' && chunk.fileName.endsWith('.css')
+      );
+      const islandBundle = await buildIslands(root, islandToPathMap);
+      const islandsCode = (islandBundle as RollupOutput).output[0].code;
       const html = `
 <!DOCTYPE html>
 <html>
@@ -161,10 +175,15 @@ export async function renderPage(
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>title</title>
     <meta name="description" content="xxx">
+    ${styleAssets
+      .map((item) => `<link rel="stylesheet" href="/${item.fileName}">`)
+      .join('\n')}
   </head>
   <body>
     <div id="root">${appHtml}</div>
+    <script type="module">${islandsCode}</script>
     <script type="module" src="/${clientChunk?.fileName}"></script>
+    <script id="island-props">${JSON.stringify(islandProps)}</script>
   </body>
 </html>`.trim();
       const fileName = routePath.endsWith('/')
