@@ -1,4 +1,4 @@
-import { usePageData } from '@runtime';
+import { usePageData } from '../../../runtime/index';
 import { NavItemWithLink } from 'shared/types';
 import { SwitchAppearance } from '../SwitchAppearance';
 import styles from './index.module.scss';
@@ -43,7 +43,7 @@ export function Nav() {
           </div>
           {/* 白天/夜间模式切换 */}
           <div before="menu-item-before" flex="~">
-            <SwitchAppearance />
+            <SwitchAppearance __island />
           </div>
           {/* 相关链接 */}
           <div className={styles.socialLinkIcon} before="menu-item-before">

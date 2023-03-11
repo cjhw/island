@@ -24,7 +24,7 @@ export function Switch(props: SwitchProps) {
   );
 }
 
-export function SwitchAppearance() {
+export function SwitchAppearance(props: { __island: boolean }) {
   return (
     <Switch onClick={toggle}>
       <div className={styles.sun}>

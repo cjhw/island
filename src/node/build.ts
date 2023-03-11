@@ -97,7 +97,7 @@ async function buildIslands(
     ${Object.entries(islandToPathMap)
       .map(
         ([islandName, islandPath]) =>
-          `import { ${islandName} } from '${islandPath}'`
+          `import { ${islandName} } from '${islandPath}';`
       )
       .join('')}
 window.ISLANDS = { ${Object.keys(islandToPathMap).join(', ')} };
@@ -223,5 +223,5 @@ export async function renderPage(
       await fs.writeFile(join(root, 'build', fileName), html);
     })
   );
-  // await fs.remove(join(root, '.temp'));
+  await fs.remove(join(root, '.temp'));
 }
