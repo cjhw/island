@@ -8,3 +8,4 @@ esm-cjs
 docs
 filetoc.config.js
 *.d.ts
+vendors

@@ -1,0 +1,1 @@
+import{useState as u}from"react";import{jsxs as e,jsx as t}from"react/jsx-runtime";function s(){const[n,o]=u(0);return e("div",{children:[t("p",{children:n}),t("button",{onClick:()=>o(r=>r+1),children:"\u70B9\u51FB\u52A01"})]})}export{s as default};

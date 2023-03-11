@@ -11,3 +11,10 @@ export const SERVER_ENTRY_PATH = join(RUNTIME_PATH, 'ssr-entry.tsx');
 export const DEFAULT_HTML_PATH = join(PACKAGE_ROOT, 'template.html');
 
 export const MASK_SPLITTER = '!!ISLAND!!';
+
+export const EXTERNALS = [
+  'react',
+  'react-dom',
+  'react-dom/client',
+  'react/jsx-runtime'
+];
