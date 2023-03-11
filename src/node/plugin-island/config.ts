@@ -4,6 +4,7 @@ import { Plugin } from 'vite';
 import { normalizePath } from 'vite';
 import { PACKAGE_ROOT } from '../constants/index';
 import sirv from 'sirv';
+import fs from 'fs-extra';
 
 const SITE_DATA_ID = 'island:site-data';
 
@@ -68,8 +69,9 @@ export function pluginConfig(
     },
     configureServer(server) {
       const publicDir = join(config.root, 'public');
-
-      server.middlewares.use(sirv(publicDir));
+      if (fs.existsSync(publicDir)) {
+        server.middlewares.use(sirv(publicDir));
+      }
     }
   };
 }
