@@ -22,10 +22,15 @@ export const remarkPluginToc: Plugin<[], Root> = () => {
     // slugger具有记忆功能，所以不能放全局，比如第二次编译还是a会变成a-1
     const slugger = new Slugger();
     const toc: TocItem[] = [];
+    let title = '';
 
     visit(tree, 'heading', (node) => {
       if (!node.depth || !node.children?.length) {
         return;
+      }
+
+      if (node.depth === 1) {
+        title = (node.children[0] as ChildNode).value;
       }
       // h2 ~ h4
       if (node.depth > 1 && node.depth < 5) {
@@ -60,5 +65,20 @@ export const remarkPluginToc: Plugin<[], Root> = () => {
         }) as unknown as Program
       }
     });
+
+    if (title) {
+      const insertedTitle = `export const title = '${title}';`;
+
+      tree.children.push({
+        type: 'mdxjsEsm',
+        value: insertedTitle,
+        data: {
+          estree: parse(insertedTitle, {
+            ecmaVersion: 2020,
+            sourceType: 'module'
+          }) as unknown as Program
+        }
+      } as MdxjsEsm);
+    }
   };
 };
