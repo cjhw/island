@@ -3,6 +3,7 @@ import { resolve } from 'path';
 import { createDevServer } from './dev';
 import { build } from './build';
 import { resolveConfig } from './config';
+import { preview } from './preview';
 
 const cli = cac('island').version('0.0.1').help();
 
@@ -26,6 +27,18 @@ cli
       root = resolve(root);
       const config = await resolveConfig(root, 'build', 'production');
       await build(root, config[0]);
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+cli
+  .command('preview [root]', 'preview production build')
+  .option('--port <port>', 'port to use for preview server')
+  .action(async (root: string, { port }: { port: number }) => {
+    try {
+      root = resolve(root);
+      await preview(root, { port });
     } catch (e) {
       console.log(e);
     }
