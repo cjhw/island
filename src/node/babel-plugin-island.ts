@@ -8,7 +8,6 @@ import { normalizePath } from 'vite';
 
 export default declare((api) => {
   api.assertVersion(7);
-
   const visitor: Visitor<PluginPass> = {
     // 访问 JSX 开始标签
     JSXOpeningElement(path, state) {

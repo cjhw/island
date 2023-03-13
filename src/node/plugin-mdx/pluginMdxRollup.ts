@@ -42,5 +42,5 @@ export async function pluginMdxRollup(): Promise<Plugin> {
         }
       ]
     ]
-  });
+  }) as Plugin;
 }

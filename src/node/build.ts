@@ -31,6 +31,10 @@ export async function bundle(root: string, config: SiteConfig) {
     root,
     plugins: await createVitePlugins(config, undefined, undefined, isServer),
     ssr: {},
+    // 防止esbuild提前编译tsx
+    esbuild: {
+      jsx: 'preserve'
+    },
     build: {
       ssr: isServer,
       outDir: isServer ? join(TEMP_PATH, 'ssr') : join(root, CLIENT_OUTPUT),

@@ -8,8 +8,9 @@ import { Plugin } from 'vite';
 import pluginUnocss from 'unocss/vite';
 import unocssOptions from './unocssOptions';
 import path from 'path';
-import { PACKAGE_ROOT } from './constants';
+import { ISLAND_JSX_RUNTIME_PATH, PACKAGE_ROOT } from './constants';
 import babelPluginIsland from './babel-plugin-island';
+import { pluginIsland } from './plugin-island';
 
 export async function createVitePlugins(
   config: SiteConfig,
@@ -19,18 +20,17 @@ export async function createVitePlugins(
 ) {
   return [
     pluginUnocss(unocssOptions),
-    pluginIndexHtml(),
-    pluginReact({
-      jsxRuntime: 'automatic',
-      jsxImportSource: isSSR
-        ? path.join(PACKAGE_ROOT, 'src', 'runtime')
-        : 'react',
-      babel: {
-        plugins: [babelPluginIsland]
-      }
-    }),
-    pluginConfig(config, dependences, restartServer),
-    pluginRoutes({ root: config.root, isSSR }),
-    createMdxPlugins()
+    await createMdxPlugins(),
+    pluginIsland(config, dependences, restartServer, isSSR),
+    isSSR
+      ? []
+      : pluginReact({
+          jsxRuntime: 'automatic',
+          jsxImportSource: isSSR ? ISLAND_JSX_RUNTIME_PATH : 'react',
+          babel: {
+            plugins: [babelPluginIsland]
+          }
+        }),
+    pluginRoutes({ root: config.root, isSSR })
   ] as Plugin[];
 }
