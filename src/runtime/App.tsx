@@ -1,7 +1,7 @@
 import { Layout } from '../theme-default';
 import { routes } from 'island:routes';
 import { matchRoutes } from 'react-router-dom';
-import { PageData } from 'shared/types';
+import { PageData } from '../shared/types';
 import siteData from 'island:site-data';
 
 export function App() {

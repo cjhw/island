@@ -1,4 +1,4 @@
-import { Feature } from 'shared/types';
+import { Feature } from '../../../shared/types';
 
 export function HomeFeature(props: { features: Feature[] }) {
   return (

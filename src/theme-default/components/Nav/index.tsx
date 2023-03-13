@@ -1,5 +1,5 @@
 import { usePageData } from '../../../runtime/index';
-import { NavItemWithLink } from 'shared/types';
+import { NavItemWithLink } from '../../../shared/types';
 import { SwitchAppearance } from '../SwitchAppearance';
 import styles from './index.module.scss';
 

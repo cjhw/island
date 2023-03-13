@@ -1,6 +1,6 @@
-import { usePageData } from '@runtime';
+import { usePageData } from '../../runtime';
 import { useLocation } from 'react-router-dom';
-import { SidebarItem } from 'shared/types';
+import { SidebarItem } from '../../shared/types';
 
 export function usePrevNextPage() {
   const { pathname } = useLocation();

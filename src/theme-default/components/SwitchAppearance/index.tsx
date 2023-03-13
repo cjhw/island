@@ -1,3 +1,4 @@
+import { PropsWithIsland } from '../../../shared/types';
 import { toggle } from '../../../theme-default/logic/toggleAppearance';
 import styles from './index.module.scss';
 
@@ -24,7 +25,7 @@ export function Switch(props: SwitchProps) {
   );
 }
 
-export function SwitchAppearance(props: { __island: boolean }) {
+export function SwitchAppearance(props: PropsWithIsland) {
   return (
     <Switch onClick={toggle}>
       <div className={styles.sun}>

@@ -1,6 +1,6 @@
 {
   "name": "cai-island",
-  "version": "1.0.5",
+  "version": "1.0.18",
   "description": "Vite SSG framework based on islands arch",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -34,7 +34,9 @@
     "src/runtime",
     "src/theme-default",
     "src/shared",
-    "template.html"
+    "tsconfig.json",
+    "template.html",
+    "vendors"
   ],
   "keywords": [
     "vite",
@@ -69,7 +71,7 @@
     "husky": "^8.0.2",
     "lint-staged": "^13.0.4",
     "minimist": "^1.2.8",
-    "rollup": "^3.4.0",
+    "rimraf": "^4.4.0",
     "sass": "^1.58.0",
     "semver": "^7.3.8",
     "tsup": "^6.5.0",
@@ -118,6 +120,7 @@
     "remark-rehype": "^10.1.0",
     "remark-stringify": "^10.0.2",
     "resolve": "^1.22.1",
+    "rollup": "^3.19.1",
     "shiki": "^0.12.1",
     "sirv": "^2.0.2",
     "unified": "^10.1.2",

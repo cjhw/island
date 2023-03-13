@@ -5,7 +5,8 @@ import {
   EXTERNALS,
   MASK_SPLITTER,
   PACKAGE_ROOT,
-  SERVER_ENTRY_PATH
+  SERVER_ENTRY_PATH,
+  TEMP_PATH
 } from './constants';
 import path, { dirname, join } from 'path';
 import fs from 'fs-extra';
@@ -16,6 +17,7 @@ import { createVitePlugins } from './vitePlugins';
 import { Route } from './plugin-routes';
 import { RenderResult } from 'runtime/ssr-entry';
 import { HelmetData } from 'react-helmet-async';
+import { pathToFileURL } from 'url';
 
 const spinner = ora();
 
@@ -28,17 +30,14 @@ export async function bundle(root: string, config: SiteConfig) {
     mode: 'production',
     root,
     plugins: await createVitePlugins(config, undefined, undefined, isServer),
-    ssr: {
-      // 将包打包进ssr的产物，不然因为react-router-dom是esm格式的require会报错
-      noExternal: ['react-router-dom', 'lodash-es']
-    },
+    ssr: {},
     build: {
       ssr: isServer,
-      outDir: isServer ? join(root, '.temp') : join(root, CLIENT_OUTPUT),
+      outDir: isServer ? join(TEMP_PATH, 'ssr') : join(root, CLIENT_OUTPUT),
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
-          format: isServer ? 'cjs' : 'esm'
+          format: 'es'
         },
         external: EXTERNALS
       }
@@ -52,9 +51,9 @@ export async function bundle(root: string, config: SiteConfig) {
       // client build
       viteBuild(await resolveViteConfig(false)),
       // server build
-      viteBuild(await resolveViteConfig(true)),
-      spinner.succeed('Build client + server bundles success')
+      viteBuild(await resolveViteConfig(true))
     ]);
+    spinner.succeed('Build client + server bundles success');
     const publicDir = join(root, 'public');
     if (fs.pathExistsSync(publicDir)) {
       await fs.copy(publicDir, join(root, CLIENT_OUTPUT));
@@ -69,12 +68,13 @@ export async function bundle(root: string, config: SiteConfig) {
 
 export async function build(root: string = process.cwd(), config: SiteConfig) {
   // 1. bundle - client 端 + server 端
-
   const [clientBundle] = await bundle(root, config);
   // 2. 引入 server-entry 模块
-  const serverEntryPath = join(root, '.temp', 'ssr-entry.js');
+  const serverEntryPath = join(TEMP_PATH, 'ssr', 'ssr-entry.mjs');
 
-  const { render, routes } = await import(resolvePath(serverEntryPath));
+  const { render, routes } = await import(
+    pathToFileURL(serverEntryPath) as unknown as string
+  );
   // 3. 服务端渲染，产出 HTML
   await renderPage(render, root, clientBundle, routes);
 }
@@ -91,7 +91,6 @@ async function buildIslands(
   // window.ISLAND_PROPS = JSON.parse(
   //   document.getElementById('island-props').textContent
   // );
-
   // 根据 islandPathToMap 拼接模块代码内容
   const islandsInjectCode = `
     ${Object.entries(islandToPathMap)
@@ -115,7 +114,7 @@ window.ISLAND_PROPS = JSON.parse(
     },
     build: {
       // 输出目录
-      outDir: path.join(root, '.temp'),
+      outDir: path.join(TEMP_PATH, 'ssr'),
       rollupOptions: {
         input: injectId,
         external: EXTERNALS
@@ -223,5 +222,5 @@ export async function renderPage(
       await fs.writeFile(join(root, 'build', fileName), html);
     })
   );
-  await fs.remove(join(root, '.temp'));
+  // await fs.remove(join(root, '.temp'));
 }

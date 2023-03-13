@@ -1,4 +1,4 @@
-import { SidebarGroup, SidebarItem } from 'shared/types';
+import { SidebarGroup, SidebarItem } from '../../../shared/types';
 import styles from './index.module.scss';
 import { Link } from '../Link/index';
 interface SidebarProps {

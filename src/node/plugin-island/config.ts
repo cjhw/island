@@ -1,5 +1,5 @@
 import { join, relative, resolve } from 'path';
-import { SiteConfig } from 'shared/types/index';
+import { SiteConfig } from '../../shared/types/index';
 import { Plugin } from 'vite';
 import { normalizePath } from 'vite';
 import { PACKAGE_ROOT } from '../constants/index';
@@ -34,6 +34,17 @@ export function pluginConfig(
           alias: {
             '@runtime': join(PACKAGE_ROOT, 'src', 'runtime', 'index.ts')
           }
+        },
+        optimizeDeps: {
+          include: [
+            'react',
+            'react-dom',
+            'react-dom/client',
+            'react-router-dom',
+            'react/jsx-runtime',
+            'react-helmet-async',
+            'lodash-es'
+          ]
         },
         css: {
           modules: {

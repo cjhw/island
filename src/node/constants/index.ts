@@ -8,6 +8,8 @@ export const CLIENT_ENTRY_PATH = join(RUNTIME_PATH, 'client-entry.tsx');
 
 export const SERVER_ENTRY_PATH = join(RUNTIME_PATH, 'ssr-entry.tsx');
 
+export const TEMP_PATH = join(PACKAGE_ROOT, 'node_modules', '.island');
+
 export const DEFAULT_HTML_PATH = join(PACKAGE_ROOT, 'template.html');
 
 export const MASK_SPLITTER = '!!ISLAND!!';

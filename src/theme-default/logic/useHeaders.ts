@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Header } from 'shared/types';
+import { Header } from '../../shared/types';
 
 export function useHeaders(initHeaders: Header[]) {
   const [headers, setHeaders] = useState(initHeaders);

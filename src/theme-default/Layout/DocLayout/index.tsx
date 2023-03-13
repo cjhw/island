@@ -1,4 +1,4 @@
-import { usePageData, Content } from '@runtime';
+import { usePageData, Content } from '../../../runtime';
 import { useLocation } from 'react-router-dom';
 import { Aside } from '../../components/Aside';
 import { DocFooter } from '../../components/DocFooter';

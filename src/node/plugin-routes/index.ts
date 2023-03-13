@@ -1,4 +1,4 @@
-import { PageModule } from 'shared/types';
+import { PageModule } from '../../shared/types';
 import { Plugin } from 'vite';
 import { RouteService } from './RouteService';
 

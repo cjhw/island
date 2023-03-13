@@ -1,4 +1,4 @@
-import { Hero } from 'shared/types';
+import { Hero } from '../../../shared/types';
 import styles from './index.module.scss';
 import { Button } from '../Button/index';
 

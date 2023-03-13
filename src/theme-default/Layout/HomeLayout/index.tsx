@@ -1,4 +1,4 @@
-import { usePageData } from '@runtime';
+import { usePageData } from '../../../runtime';
 import { HomeHero } from '../../components/HomeHero/index';
 import { HomeFeature } from '../../components/HomeFeature/index';
 
