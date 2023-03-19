@@ -1,6 +1,6 @@
 # 新一代全栈框架 Fresh
 
-大家好，我是 pujie。今天给大家介绍一个新的框架 Fresh，由 Deno 作者出品，在最近发布了 1.0 的正式版本，宣布支持了生产环境，并且在 Github 上热度也比较高，现在是时候给大家详细地介绍一下这个方案了。接下来会从**框架定位**、**上手体验**、**优劣势评估**和**源码实现**这几个方面来给大家深入解读 Fresh 框架。
+大家好，我是 cjhw。今天给大家介绍一个新的框架 Fresh，由 Deno 作者出品，在最近发布了 1.0 的正式版本，宣布支持了生产环境，并且在 Github 上热度也比较高，现在是时候给大家详细地介绍一下这个方案了。接下来会从**框架定位**、**上手体验**、**优劣势评估**和**源码实现**这几个方面来给大家深入解读 Fresh 框架。
 
 ## 框架定位
 
@@ -324,5 +324,3 @@ export function revive(islands: Record<string, ComponentType>, props: any[]) {
 ## 小结
 
 以上就是本文的全部内容，分别从**框架定位**、**上手体验**、**优劣势评估**和**源码实现**来介绍了如今比较火的 Fresh 框架。
-
-最后需要跟大家说明的是，Fresh 中关于 Islands 架构的实现是基于 Preact 的，我本人也借鉴了 Fresh 的思路，通过拦截 React.createElement 方法在 React 当中也实现了 Islands 架构，代码放在了 `react-islands`仓库中(地址: https://github.com/sanyuan0704/react-islands)，代码不多，相当于 Fresh 的简化版，感兴趣的小伙伴可以拉下来看看~

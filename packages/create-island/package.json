@@ -1,0 +1,44 @@
+{
+  "name": "cai-create-island",
+  "version": "1.0.24",
+  "description": "create template for islandjs",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "create-island": "./bin/index.js"
+  },
+  "files": [
+    "template",
+    "bin",
+    "dist"
+  ],
+  "scripts": {
+    "pnpm-install": "pnpm install",
+    "dev": "tsup --watch --format=cjs,esm",
+    "build": "cross-env NODE_ENV=production tsup --format=cjs,esm"
+  },
+  "keywords": [
+    "vite",
+    "ssg",
+    "island architecture",
+    "cli",
+    "template"
+  ],
+  "author": "cjhw",
+  "license": "MIT",
+  "lint-staged": {
+    "**/*.{js,jsx,tsx,ts,json}": [
+      "eslint --fix"
+    ]
+  },
+  "devDependencies": {
+    "@types/prompts": "^2.4.2",
+    "@types/minimist": "^1.2.2",
+    "execa": "5",
+    "kolorist": "^1.7.0",
+    "minimist": "^1.2.7",
+    "prompts": "^2.4.2"
+  }
+}

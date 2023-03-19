@@ -7,4 +7,6 @@
 **/tsconfig.base.json
 vendors
 **/__tests__/**
-**/scripts/**
+filetoc.config.js
+dist
+docs

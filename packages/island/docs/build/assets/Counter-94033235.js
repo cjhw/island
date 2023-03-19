@@ -1,0 +1,1 @@
+import{jsxs as e,jsx as t}from"react/jsx-runtime";import{useState as i}from"react";function s(){const[n,o]=i(0);return e("div",{children:[t("p",{children:n}),t("button",{onClick:()=>o(r=>r+1),children:"点击加1"})]})}export{s as default};
