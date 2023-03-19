@@ -3,6 +3,7 @@ import { Plugin, transformWithEsbuild } from 'vite';
 import { transformAsync } from '@babel/core';
 import babelPluginIsland from '../babel-plugin-island';
 import { SiteConfig } from 'shared/types/index';
+import babelReact from '@babel/preset-react';
 
 export function pluginIslandTransform(
   config: SiteConfig,
