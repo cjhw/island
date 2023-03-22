@@ -1,6 +1,6 @@
 {
   "name": "cai-island",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "Vite SSG framework based on islands arch",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

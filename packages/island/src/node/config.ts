@@ -31,6 +31,7 @@ export async function resolveUserConfig(
   // 2. 读取配置文件的内容
   const result = await loadConfigFromFile({ command, mode }, configPath, root);
   if (result) {
+    // dependences是配置文件依赖的文件，依赖的模块更新同样热更新
     const { config: rawConfig = {} as RawConfig, dependencies } = result;
     // 三种情况:
     // 1. object

@@ -1,11 +1,10 @@
 import { cac } from 'cac';
 import { resolve } from 'path';
-import { createDevServer } from './dev';
 import { build } from './build';
 import { resolveConfig } from './config';
 import { preview } from './preview';
 
-const cli = cac('island').version('0.0.1').help();
+const cli = cac('island').version('1.0.25').help();
 
 cli.command('dev [root]', 'start dev server').action(async (root: string) => {
   const createServer = async () => {

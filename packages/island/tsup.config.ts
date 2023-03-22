@@ -1,4 +1,3 @@
-import { declare } from '@babel/helper-plugin-utils';
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
